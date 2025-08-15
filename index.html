@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sensor Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2 class="title">Sensor Dashboard</h2>
+
+  <!-- NEW: Single Sensor Card for Carousel Display -->
+  <div class="sensor-carousel-card">
+    <h3 id="carouselSensorName">Loading...</h3>
+    <p class="value" id="carouselSensorValue">--</p>
+    <p class="status" id="carouselSensorStatus">Loading...</p>
+  </div>
+  <!-- End NEW -->
+
+  <!-- Room Tabs (Not connected to Firebase in this example) -->
+  <div class="room-tabs">
+    <button>Living Room</button>
+    <button>Bedroom</button>
+    <button>Kitchen</button>
+  </div>
+
+  <!-- Device Controls -->
+  <div class="devices">
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="lock.svg" alt="Smart Door" /></span>
+      <!-- Targets control/lock_value -->
+      <button class="card-toggle" data-device="lock_value"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Smart Door</strong></p>
+      <p>Consume 0.05kWh</p>
+      <p>Active 23h 52m</p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="tv.svg" alt="Smart TV" /></span>
+      <!-- Connection for Smart TV to relay/relay_state1 -->
+      <button class="card-toggle" data-relay-control="relay/relay_state1"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Sound System</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="fan.svg" alt="Fan" /></span>
+      <!-- Connection for Fan to relay/relay_state2 -->
+      <button class="card-toggle" data-relay-control="relay/relay_state2"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Fan</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="lightbulb.svg" alt="Lamp 3" /></span>
+      <!-- Connection for Lamp 3 to relay/relay_state3 -->
+      <button class="card-toggle" data-relay-control="relay/relay_state3"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Lamp</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="moon.svg" alt="Night Light" /></span>
+      <!-- This correctly maps to control/temperature_alarm -->
+      <button class="card-toggle" data-device="temperature_alarm"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Temperature Alarm</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="brightness-high.svg" alt="Ceiling Light" /></span>
+      <!-- This correctly maps to control/humidity_alarm -->
+      <button class="card-toggle" data-device="humidity_alarm"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Humidity Alarm</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="alarm.svg" alt="Alarm" /></span>
+      <!-- This correctly maps to control/motion_alarm -->
+      <button class="card-toggle" data-device="motion_alarm"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Motion Alarm (Overall)</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="person-fill.svg" alt="Motion Alarm Check 0" /></span>
+      <!-- Correctly maps to control/motion_alarm_check0, label clarified -->
+      <button class="card-toggle" data-device="motion_alarm_check0"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Motion Alarm Chk 0</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="person-fill.svg" alt="Motion Alarm Check 1" /></span>
+      <!-- Correctly maps to control/motion_alarm_check1, label clarified -->
+      <button class="card-toggle" data-device="motion_alarm_check1"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Motion Alarm Chk 1</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="person-fill.svg" alt="Motion Alarm Check 2" /></span>
+      <!-- Correctly maps to control/motion_alarm_check2, label clarified -->
+      <button class="card-toggle" data-device="motion_alarm_check2"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Motion Alarm Chk 2</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="person-fill.svg" alt="Motion Alarm Check 3" /></span>
+      <!-- Correctly maps to control/motion_alarm_check3, label clarified -->
+      <button class="card-toggle" data-device="motion_alarm_check3"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Motion Alarm Chk 3</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <!-- NEW: Added explicit button for control/presence_sensor -->
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="person-fill.svg" alt="Room Presence Sensor" /></span>
+      <button class="card-toggle" data-device="presence_sensor"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Room Presence Sensor</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <div class="device-card">
+      <span class="device-icon-bg"><img src="house.svg" alt="Garage Door" /></span>
+      <!-- Assumed this maps to control/garage_door -->
+      <button class="card-toggle" data-device="garage_door"><img src="toggle-off.svg" alt="Toggle Off" /></button>
+      <p><strong>Garage Door</strong></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <!-- NEW: RGB Light Control Card -->
+    <div class="device-card" id="rgbLightControlCard">
+      <span class="device-icon-bg"><img src="color-fill.svg" alt="RGB Light" /></span>
+      <!-- This card will open the RGB control modal -->
+      <button class="card-toggle">
+        <img src="brightness-high.svg" alt="Adjust" style="width: 32px; height: 32px;"/>
+      </button>
+      <p><strong>RGB Light</strong></p>
+      <p>Adjust color</p>
+      <p>&nbsp;</p> <!-- Placeholder for consistent height -->
+    </div>
+    <!-- End NEW -->
+
+  </div>
+
+  <!-- Bottom Nav (Not connected to Firebase in this example) -->
+  <div class="bottom-nav">
+    <div><span class="device-icon-bg"><img src="house.svg" alt="Home" /></span> Home</div>
+    <div><span class="device-icon-bg"><img src="fan.svg" alt="Fan" /></span> Devices</div>
+    <div><span class="device-icon-bg"><img src="alarm.svg" alt="Schedule" /></span> Schedule</div>
+    <div><span class="device-icon-bg"><img src="person.svg" alt="Profile" /></span> Profile</div>
+  </div>
+
+  <!-- NEW: RGB Light Control Modal -->
+  <div id="rgbControlModal" class="rgb-control-modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h3>RGB Light Control</h3>
+
+      <div class="color-preview" id="rgbColorPreview" style="background-color: #000000;"></div>
+
+      <div class="slider-group">
+        <label for="redSlider">Red:</label>
+        <input type="range" id="redSlider" min="0" max="255" value="0">
+        <span class="slider-value" id="redValue">0</span>
+      </div>
+
+      <div class="slider-group">
+        <label for="greenSlider">Green:</label>
+        <input type="range" id="greenSlider" min="0" max="255" value="0">
+        <span class="slider-value" id="greenValue">0</span>
+      </div>
+
+      <div class="slider-group">
+        <label for="blueSlider">Blue:</label>
+        <input type="range" id="blueSlider" min="0" max="255" value="0">
+        <span class="slider-value" id="blueValue">0</span>
+      </div>
+
+      <!-- Add a "Set Color" button if you prefer non-realtime updates, otherwise changes automatically -->
+      <!-- <button id="setColorButton">Set Color</button> -->
+    </div>
+  </div>
+  <!-- End NEW -->
+
+
+  <!-- Your main JavaScript file, loaded as a module -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
